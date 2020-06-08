@@ -14,8 +14,8 @@ DOCKER_HOME=/home/powerless
                 #-v /tmp/.X11-unix:/tmp/.X11-unix \
                 #-v /var/run/docker.sock:/var/run/docker.sock \
 		#--user ${USER_ID}:${GROUP_ID} \
-		#--entrypoint /bin/bash \
 CMD="docker run --env DISPLAY=host.docker.internal:0 \
+		--entrypoint /bin/bash \
                 --interactive \
                 --name IntelliJ \
                 --net "host" \

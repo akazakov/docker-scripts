@@ -1,18 +1,23 @@
-FROM kazakov/grpc
+FROM kazakov/base
 
-MAINTAINER Artem
+MAINTAINER Artem Kazakov <kazakov@gmail.com>
 
-ENTRYPOINT ["/opt/idea/bin/idea.sh"]
+# default to being in the user's home directory
 
 USER root
 
-ADD https://download.jetbrains.com/idea/ideaIC-2019.3.5.tar.gz /tmp/arch-idea.tar.gz
+# Mono
+RUN DEBIAN_FRONTEND="noninteractive" apt-get -qqy install tzdata
+RUN apt-get -qq update && \
+    apt-get -qqy install mono-complete
 
-# default to being in the user's home directory
-WORKDIR /home/powerless
+# Python
+RUN apt-get -qq update && \
+    apt-get -qqy install python
 
-RUN tar --extract --verbose --directory /tmp --file /tmp/arch-idea.tar.gz
-RUN mv /tmp/idea* /opt/idea
-RUN rm -f /tmp/arch-idea.tar.gz
+RUN apt-get -qq update && \
+    apt-get -qqy install nodejs
 
 USER powerless
+
+WORKDIR /home/powerless
