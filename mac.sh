@@ -21,13 +21,15 @@ docker run --env DISPLAY=host.docker.internal:0 \
 	--net "host" \
 	--rm \
 	--tty \
-	-v ${HOME}/.Idea:${DOCKER_HOME}/.Idea \
-	-v ${HOME}/.cache:${DOCKER_HOME}/.cache \
-	-v ${HOME}/.java:${DOCKER_HOME}/.java \
-	-v ${HOME}/projects:${DOCKER_HOME}/projects \
-	-v ${HOME}/.Idea.share:${DOCKER_HOME}/.Idea.share \
-	-v ${HOME}/.IdeaIC2019.3:/home/powerless/.IdeaIC2019.3 \
-	-v "${HOME}/Library/Application Support/IdeaIC2019.3":/home/powerless/.IdeaIC2019.3/config/plugins \
+	-v cache:${DOCKER_HOME}/.cache \
+	-v ${HOME}/.Idea:${DOCKER_HOME}/.Idea:delegated \
+	-v ${HOME}/.java:${DOCKER_HOME}/.java:delegated \
+	-v ${HOME}/projects:${DOCKER_HOME}/projects:delegated \
+	-v ${HOME}/Downloads:${DOCKER_HOME}/Downloads:delegated \
+	-v ${HOME}/install:${DOCKER_HOME}/install:delegated \
+	-v ${HOME}/.Idea.share:${DOCKER_HOME}/.Idea.share:delegated \
+	-v ${HOME}/.IdeaIC2019.3:/home/powerless/.IdeaIC2019.3:delegated \
+	-v "${HOME}/Library/Application Support/IdeaIC2019.3":/home/powerless/.IdeaIC2019.3/config/plugins:ro \
 	--env HOME=${DOCKER_HOME} \
 	--workdir ${DOCKER_HOME} \
 	${IMAGE}

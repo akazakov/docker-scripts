@@ -6,6 +6,8 @@ MAINTAINER Artem Kazakov <kazakov@gmail.com>
 
 USER root
 
+RUN apt-get -qq clean
+
 # Mono
 RUN DEBIAN_FRONTEND="noninteractive" apt-get -qqy install tzdata
 RUN apt-get -qq update && \
@@ -19,5 +21,6 @@ RUN apt-get -qq update && \
     apt-get -qqy install nodejs
 
 USER powerless
+RUN mkdir /home/powerless/.cache
 
 WORKDIR /home/powerless
